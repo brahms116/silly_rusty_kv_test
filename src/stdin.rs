@@ -1,10 +1,7 @@
-
+use super::*;
 use std::io::Write;
 use std::process::{Command, Stdio};
 use std::time::Instant;
-use super::*;
-
-
 
 fn run_db_command(input: String) -> String {
     let mut child = Command::new(BINARY_PATH)
@@ -24,17 +21,15 @@ fn run_db_command(input: String) -> String {
 }
 
 pub fn test_stdin() {
-    reset_db();
+    println!("Testing stdin...");
 
+    reset_db();
     let start = Instant::now();
-    // Generate pairs of uuids
-    let pairs: Vec<(String, String)> = (0..SAMPLE_SIZE)
-        .map(|_| (uuid_without_dash(), random_string().to_string()))
-        .collect();
+
+    let pairs = generate_pairs();
 
     let cmds = pairs_to_put_cmds(&pairs);
 
-    println!("Preparation took {:?}", start.elapsed());
     println!("Writing...");
 
     let write_start = Instant::now();

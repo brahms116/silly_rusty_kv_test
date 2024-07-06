@@ -53,6 +53,12 @@ pub fn check_pairs(pairs: &Vec<(String, String)>, output: &str) {
     });
 }
 
+pub fn generate_pairs() -> Vec<(String, String)> {
+    (0..SAMPLE_SIZE)
+        .map(|_| (uuid_without_dash(), random_string().to_string()))
+        .collect()
+}
+
 pub fn check_output_for_deletes(output: &str) {
     output.lines().for_each(|line| {
         if line != "Key not found" {
