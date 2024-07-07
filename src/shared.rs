@@ -6,6 +6,8 @@ pub const BINARY_PATH: &str = "../silly_rusty_kv/target/release/silly_rusty_kv";
 pub const SAMPLE_SIZE: usize = 10_000;
 pub const BODY_SIZE: usize = 100;
 
+pub const KEY_NOT_FOUND: &'static str = "Key not found";
+
 pub fn reset_db() {
     remove_file("hash_dir.db").unwrap_or_else(|_| println!("No file to delete"));
     remove_file("hash_data.db").unwrap_or_else(|_| println!("No file to delete"));
@@ -61,7 +63,7 @@ pub fn generate_pairs() -> Vec<(String, String)> {
 
 pub fn check_output_for_deletes(output: &str) {
     output.lines().for_each(|line| {
-        if line != "Key not found" {
+        if line != KEY_NOT_FOUND {
             panic!("Delete failed");
         }
     });

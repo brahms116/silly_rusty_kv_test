@@ -24,8 +24,6 @@ pub fn test_stdin() {
     println!("Testing stdin...");
 
     reset_db();
-    let start = Instant::now();
-
     let pairs = generate_pairs();
 
     let cmds = pairs_to_put_cmds(&pairs);
